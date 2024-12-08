@@ -19,7 +19,7 @@ import com.example.shoppinglist.R
 import com.example.shoppinglist.domain.ShopItem
 import com.google.android.material.textfield.TextInputLayout
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishListener {
 
     private var screenMode = MODE_UNKNOWN
     private var shopItemId = ShopItem.UNDEFINED_ID
@@ -35,6 +35,10 @@ class ShopItemActivity : AppCompatActivity() {
             launchScreenMode()
         }
 
+    }
+
+    override fun onEditingFinishListener() {
+        finish()
     }
 
     private fun launchScreenMode() {
