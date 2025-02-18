@@ -12,19 +12,19 @@ abstract class AppDataBase : RoomDatabase() {
 
     abstract fun shopListDao(): ShopListDao
 
-    companion object{
+    companion object {
 
-         private var INSTANCE: AppDataBase? = null
+        private var INSTANCE: AppDataBase? = null
         private val LOCK = Any()
         private const val DB_NAME = "shop_item.dp"
 
         @OptIn(InternalCoroutinesApi::class)
-        fun getInstance(application: Application) : AppDataBase {
-            INSTANCE?. let {
+        fun getInstance(application: Application): AppDataBase {
+            INSTANCE?.let {
                 return it
             }
-            synchronized(LOCK){
-                INSTANCE?. let {
+            synchronized(LOCK) {
+                INSTANCE?.let {
                     return it
                 }
             }
@@ -32,7 +32,7 @@ abstract class AppDataBase : RoomDatabase() {
                 application,
                 AppDataBase::class.java,
                 DB_NAME
-            ).build()
+            ).allowMainThreadQueries().build()
             INSTANCE = db
             return db
         }
